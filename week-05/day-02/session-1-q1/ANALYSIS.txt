@@ -1,0 +1,42 @@
+English-to-German Sequence-to-Sequence Translation
+
+The experiment used 29,000 Multi30k training pairs, 1,014 validation pairs, and
+1,000 held-out test pairs. Separate English and German tokenizers were fitted
+only on training sentences, preserving punctuation and providing an unknown-word
+token. Text was lowercased. English inputs were post-padded or truncated to
+20 tokens. German sequences reserved positions for start and end markers,
+leaving at most 18 content tokens before shifting for teacher forcing.
+
+The encoder and decoder each used 256-dimensional embeddings and a 512-unit
+LSTM. Encoder hidden and cell states initialized the decoder. A softmax layer
+predicted the next German token across the training vocabulary. Adam minimized
+sparse categorical cross-entropy over ten epochs with batches of 64. Padding
+was masked and excluded from token accuracy. The model had 25,573,662 trainable
+parameters. Tokenizers and separate inference models were saved for reuse.
+
+Training loss decreased from 5.5127 to 1.7248, while validation loss decreased
+from 4.7368 to 3.4903. Training token accuracy rose from 20.99% to 61.53%;
+validation token accuracy rose from 25.65% to 46.23%. The final accuracy gap
+was 15.30 percentage points. Validation loss improved in every epoch, but
+improvements became small near the end. This suggests diminishing generalization
+gains and increasing specialization to training examples, rather than a clear
+validation-loss reversal. Held-out test loss was 3.3834 and token accuracy was
+47.20%, broadly consistent with validation performance.
+
+These accuracies use teacher forcing: each prediction receives the correct
+preceding German tokens. They do not measure complete-sentence translation
+accuracy. Greedy decoding instead feeds predictions back into the decoder,
+allowing early mistakes to propagate. The saved examples demonstrate this
+limitation. A caption about repairing a roof became a description of taking
+a photograph of a building. Another prediction changed a Boston Terrier into
+a beagle and introduced a beach and ball. The snow scene retained people and
+helmets but repeated words and omitted important details.
+
+The system therefore demonstrates the required translation pipeline, but its
+outputs are not reliably faithful or grammatically correct. A single fixed-size
+context and short sequence limit constrain information retention. Future
+experiments could compare attention, subword tokenization, regularization, and
+beam search. Evaluation should include corpus-level translation metrics and
+human checks for meaning preservation. Those extensions were not included in
+this fixed-architecture run, and no deployment-quality claim follows from the
+reported token accuracy.

@@ -1,0 +1,27 @@
+[
+  {
+    "english": "A man in an orange hat starring at something.",
+    "reference": "Ein Mann mit einem orangefarbenen Hut, der etwas anstarrt.",
+    "prediction": "ein mann mit einem hut betrachtet ein paar vögeln an."
+  },
+  {
+    "english": "A Boston Terrier is running on lush green grass in front of a white fence.",
+    "reference": "Ein Boston Terrier läuft über saftig-grünes Gras vor einem weißen Zaun.",
+    "prediction": "ein beagle läuft auf dem boden eines kleinen hund am strand mit einem ball."
+  },
+  {
+    "english": "A girl in karate uniform breaking a stick with a front kick.",
+    "reference": "Ein Mädchen in einem Karateanzug bricht ein Brett mit einem Tritt.",
+    "prediction": "ein mädchen in schulkleidung oder spielt mit einem kleinen mädchen her."
+  },
+  {
+    "english": "Five people wearing winter jackets and helmets stand in the snow, with snowmobiles in the background.",
+    "reference": "Fünf Leute in Winterjacken und mit Helmen stehen im Schnee mit Schneemobilen im Hintergrund.",
+    "prediction": "fünf personen mit weißen helmen und helmen stehen im freien und schauen sich im hintergrund stehen"
+  },
+  {
+    "english": "People are fixing the roof of a house.",
+    "reference": "Leute Reparieren das Dach eines Hauses.",
+    "prediction": "personen machen ein foto von einem gebäude."
+  }
+]

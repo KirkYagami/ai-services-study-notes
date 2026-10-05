@@ -1,0 +1,39 @@
+Sentiment Analysis with Stacked LSTMs
+
+This experiment trained a binary sentiment classifier on 10,000 IMDB reviews,
+comprising 5,000 positive and 5,000 negative examples. Validation used 2,000
+reviews with equal class representation. Reviews were selected in sorted filename
+order. A tokenizer fitted exclusively on training text limited the vocabulary to
+10,000 indices. Sequences were post-padded or post-truncated to 200 tokens, and
+zero padding was masked. NumPy and TensorFlow used seed 42.
+
+The network combined a 128-dimensional embedding with stacked LSTM layers of
+128 and 64 units. The first recurrent layer returned sequences for the second.
+Three dropout layers, each with rate 0.2, provided regularization. A 64-unit ReLU
+layer preceded the sigmoid output. Adam optimized binary cross-entropy for ten
+epochs using batches of 128. The model contained 1,465,217 trainable parameters.
+
+Training accuracy increased from 70.76% in epoch one to 98.68% in epoch ten,
+while training loss decreased from 0.5529 to 0.0446. Validation accuracy initially
+reached 80.60%, peaked at 83.50% in epoch five, and finished at 80.90%. Final
+validation loss was 0.8190, compared with its minimum of 0.4252 in epoch two.
+The final accuracy gap was 17.78 percentage points. These measurements come
+from the completed run, rather than the illustrative figures in the instructions.
+
+The widening gap indicates overfitting: additional training improved performance
+on known examples without delivering sustained validation gains. Rising
+cross-entropy despite broadly stable validation accuracy also suggests increasingly
+confident incorrect predictions. Validation accuracy fluctuated, including a drop
+to 73.00% in epoch three, so a single intermediate result should not determine
+conclusions. The saved chart shows both trajectories and their epoch-to-epoch
+variation, with final accuracy values in the bottom annotation.
+
+Future experiments could compare early stopping based on validation loss,
+smaller recurrent layers, stronger regularization, and more training reviews.
+These alternatives were not applied here because the requested run specifies
+ten epochs and a fixed architecture. Truncation can discard sentiment-bearing
+text late in longer reviews, while excluded vocabulary can remove informative
+rare words. Finally, the assignment's test split was monitored during training;
+it therefore serves as validation rather than an untouched final evaluation.
+A separate held-out set and repeated seeded runs would support stronger claims
+about generalization before deployment.
